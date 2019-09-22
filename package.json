@@ -19,6 +19,7 @@
     "typescript": "3.6.3"
   },
   "scripts": {
+    "cm": "git-cz",
     "prettier": "prettier --config .prettierrc.js --write src/**/*.ts src/**/*.tsx src/**/*.js",
     "test:nowatch": "cross-env CI=true react-scripts test --env=jsdom",
     "lint": "eslint **/*.ts **/*.tsx",
@@ -44,19 +45,35 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.0.2",
     "husky": "^3.0.5",
     "lint-staged": "^9.3.0",
     "prettier": "^1.18.2"
   },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "husky": {
+    "interactive": true,
     "hooks": {
-      "pre-commit": "lint-staged"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npm run test:nowatch && lint-staged",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
   },
   "lint-staged": {
     "*.{js,sass,ts,tsx,css,json,md}": [
       "npm run lint",
-      "npm run test:nowatch",
       "npm run prettier",
       "git add"
     ]
