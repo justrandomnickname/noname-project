@@ -23,7 +23,6 @@
     "prettier": "prettier --config .prettierrc.js --write src/**/*.ts src/**/*.tsx src/**/*.js",
     "test:nowatch": "cross-env CI=true react-scripts test --env=jsdom",
     "lint": "eslint **/*.ts **/*.tsx",
-    "eslint": "LIST=`git diff-index --name-only HEAD | grep .*\\.js | grep -v json`; if [ \"$LIST\" ]; then eslint $LIST; fi",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -76,6 +75,24 @@
       "npm run lint",
       "npm run prettier",
       "git add"
+    ]
+  },
+  "hooks": {
+    "pre-commit": [
+      {
+        "message": "You’ve got leftover conflict markers",
+        "regex": "/^[<>|=]{4,}/m"
+      },
+      {
+        "filter": "\\.js$",
+        "message": "You’ve got leftover `console.log`",
+        "regex": "console\\.log"
+      },
+      {
+        "message": "You have unfinished devs",
+        "nonBlocking": "true",
+        "regex": "(?:FIXME|TODO)"
+      }
     ]
   }
 }
