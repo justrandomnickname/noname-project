@@ -19,7 +19,7 @@
     "typescript": "3.6.3"
   },
   "scripts": {
-    "cm": "git-cz",
+    "commit": "git-cz",
     "prettier": "prettier --config .prettierrc.js --write src/**/*.ts src/**/*.tsx src/**/*.js",
     "test:nowatch": "cross-env CI=true react-scripts test --env=jsdom",
     "lint": "eslint **/*.ts **/*.tsx",
