@@ -1,0 +1,11 @@
+build/*
+
+.eslintignore
+.eslintrc.js
+.prettierrc.js
+package.json
+package-lock.json
+
+src/serviceWorker.ts
+
+.node_modules/*
