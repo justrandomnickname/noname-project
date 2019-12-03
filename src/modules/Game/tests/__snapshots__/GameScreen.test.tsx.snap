@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`(GameScreen) renders correctly 1`] = `
+.c0 {
+  width: 100%;
+  height: 100%;
+}
+
+.c1 {
+  width: 200px;
+  height: 200px;
+  border: 2px solid black;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  />
+</div>
+`;

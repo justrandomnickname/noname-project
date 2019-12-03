@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+## WINDOWS
+npm install -g windows-build-tools
+
+##ENVS
+FAST_DEPLOY = "YES" | "NOPE"
+
 ## Available Scripts
 
 In the project directory, you can run:

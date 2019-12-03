@@ -1,11 +1,33 @@
-build/*
-
+# Ignore files #
 .eslintignore
+.gitignore
+.prettierignore
+
+# Configuration files #
 .eslintrc.js
 .prettierrc.js
+webpack.config.js
+
+# Package files #
 package.json
 package-lock.json
 
-src/serviceWorker.ts
 
+# Folders #
+build/*
 .node_modules/*
+config/*
+scripts/*
+
+
+# .ts .js Files #
+src/serviceWorker.ts
+src/react-app-env.d.ts
+src/electron.js
+
+# File types #
+*.html
+*.scss
+*.worker.ts
+
+src/Workers/createMap.worker.ts

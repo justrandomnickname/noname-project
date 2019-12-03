@@ -13,10 +13,15 @@ module.exports = {
   rules: {
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
-    'no-console': 'error',
     'no-await-in-loop': 'error',
+    'no-console': 'off',
     'block-scoped-var': 'error',
     'default-case': 'error',
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "camelcase": "off",
+    "@typescript-eslint/camelcase": "off",
+    // "@typescript-eslint/interface-name-prefix": "never"
+    "@typescript-eslint/interface-name-prefix": ["error", { "prefixWithI": "always" } ],
   },
   settings: {
     react: {

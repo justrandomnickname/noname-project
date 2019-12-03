@@ -1,21 +1,20 @@
-import React from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React from "react";
+import GameScreen from "@Game/GameScreen";
+import AppRouter from "./Router/router";
+import { ThemeProvider } from "styled-components";
+import * as style from "Modules/UI/scss/variables.scss";
+import { Waiter } from "react-wait";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
-  )
-}
+    <ThemeProvider theme={style}>
+      <GameScreen>
+        <Waiter>
+          <AppRouter />
+        </Waiter>
+      </GameScreen>
+    </ThemeProvider>
+  );
+};
 
-export default App
+export default App;

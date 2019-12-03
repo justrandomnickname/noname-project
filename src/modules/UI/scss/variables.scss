@@ -1,0 +1,27 @@
+$b: rgb(179, 32, 35);
+// $primary-color: #F96167;
+// $secondary-color: #FCE77D;
+
+$primary-color: #292826;
+$secondary-color: #F9D342;
+
+$standard-text-color: #F4EADE;
+
+$font-size-title: 1.5em;
+$font-size-standard: 0.9em;
+
+$letter-spacing-title: 6px;
+
+$font-size-big-title: 3.3em;
+
+
+:export {
+  b: $b;
+  primaryColor: $primary-color;
+  secondaryColor: $secondary-color;
+  fontSizeTitle: $font-size-title;
+  fontSizeStandard: $font-size-standard;
+  standardTextColor: $standard-text-color;
+  letterSpacingTitle: $letter-spacing-title;
+  fontSizeBigTitle: $font-size-big-title;
+}
