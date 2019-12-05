@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MapGeneratorContract | typedin</title>
+	<title>IPolygon | typedin</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,13 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_modules_map_interfaces_generator_.html">&quot;Modules/Map/interfaces/Generator&quot;</a>
+					<a href="../modules/_modules_map_interfaces_polygon_.html">&quot;Modules/Map/interfaces/Polygon&quot;</a>
 				</li>
 				<li>
-					<a href="_modules_map_interfaces_generator_.mapgeneratorcontract.html">MapGeneratorContract</a>
+					<a href="_modules_map_interfaces_polygon_.ipolygon.html">IPolygon</a>
 				</li>
 			</ul>
-			<h1>Interface MapGeneratorContract</h1>
+			<h1>Interface IPolygon</h1>
 		</div>
 	</div>
 </header>
@@ -71,14 +71,8 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">MapGeneratorContract</span>
+						<span class="target">IPolygon</span>
 					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implemented by</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../classes/_modules_map_assembly_generator_.generator.html" class="tsd-signature-type">Generator</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -88,8 +82,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_modules_map_interfaces_generator_.mapgeneratorcontract.html#size" class="tsd-kind-icon">size</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_modules_map_interfaces_generator_.mapgeneratorcontract.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_modules_map_interfaces_polygon_.ipolygon.html#coords" class="tsd-kind-icon">coords</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_modules_map_interfaces_polygon_.ipolygon.html#fillstyle" class="tsd-kind-icon">fill<wbr>Style</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_modules_map_interfaces_polygon_.ipolygon.html#index" class="tsd-kind-icon">index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_modules_map_interfaces_polygon_.ipolygon.html#shapes" class="tsd-kind-icon">shapes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_modules_map_interfaces_polygon_.ipolygon.html#statistics" class="tsd-kind-icon">statistics</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_modules_map_interfaces_polygon_.ipolygon.html#strokestyle" class="tsd-kind-icon">stroke<wbr>Style</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_modules_map_interfaces_polygon_.ipolygon.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 					</div>
@@ -98,22 +97,94 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="size" class="tsd-anchor"></a>
-					<h3>size</h3>
-					<div class="tsd-signature tsd-kind-icon">size<span class="tsd-signature-symbol">:</span> <a href="../modules/_modules_map_interfaces_generator_.html#mapsize" class="tsd-signature-type">MapSize</a></div>
+					<a name="coords" class="tsd-anchor"></a>
+					<h3>coords</h3>
+					<div class="tsd-signature tsd-kind-icon">coords<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Modules/Map/interfaces/Generator.ts:33</li>
+							<li>Defined in Modules/Map/interfaces/Polygon.ts:32</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="fillstyle" class="tsd-anchor"></a>
+					<h3>fill<wbr>Style</h3>
+					<div class="tsd-signature tsd-kind-icon">fill<wbr>Style<span class="tsd-signature-symbol">:</span> <a href="../enums/_modules_map_interfaces_polygon_.fillstyle.html" class="tsd-signature-type">FillStyle</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Modules/Map/interfaces/Polygon.ts:29</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="index" class="tsd-anchor"></a>
+					<h3>index</h3>
+					<div class="tsd-signature tsd-kind-icon">index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Modules/Map/interfaces/Polygon.ts:33</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="shapes" class="tsd-anchor"></a>
+					<h3>shapes</h3>
+					<div class="tsd-signature tsd-kind-icon">shapes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Modules/Map/interfaces/Polygon.ts:31</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="statistics" class="tsd-anchor"></a>
+					<h3>statistics</h3>
+					<div class="tsd-signature tsd-kind-icon">statistics<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Modules/Map/interfaces/Polygon.ts:34</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>current<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter">
+										<h5>temp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+									</li>
+								</ul>
+							</li>
+							<li class="tsd-parameter">
+								<h5>elevation<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>is<wbr>Discovered<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>temp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="strokestyle" class="tsd-anchor"></a>
+					<h3>stroke<wbr>Style</h3>
+					<div class="tsd-signature tsd-kind-icon">stroke<wbr>Style<span class="tsd-signature-symbol">:</span> <a href="../enums/_modules_map_interfaces_polygon_.strokestyle.html" class="tsd-signature-type">StrokeStyle</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in Modules/Map/interfaces/Polygon.ts:30</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="type" class="tsd-anchor"></a>
 					<h3>type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <a href="../modules/_modules_map_interfaces_polygon_.html#polygontypes" class="tsd-signature-type">PolygonTypes</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in Modules/Map/interfaces/Generator.ts:32</li>
+							<li>Defined in Modules/Map/interfaces/Polygon.ts:28</li>
 						</ul>
 					</aside>
 				</section>
@@ -126,47 +197,50 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_modules_map_interfaces_generator_.html">"<wbr>Modules/<wbr>Map/interfaces/<wbr>Generator"</a>
+						<a href="../modules/_modules_map_interfaces_polygon_.html">"<wbr>Modules/<wbr>Map/interfaces/<wbr>Polygon"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/_modules_map_interfaces_generator_.borderiterations.html" class="tsd-kind-icon">Border<wbr>Iterations</a>
+						<a href="../enums/_modules_map_interfaces_polygon_.fillstyle.html" class="tsd-kind-icon">Fill<wbr>Style</a>
 					</li>
 					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/_modules_map_interfaces_generator_.equatorextremums.html" class="tsd-kind-icon">Equator<wbr>Extremums</a>
-					</li>
-					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/_modules_map_interfaces_generator_.lloyditerations.html" class="tsd-kind-icon">Lloyd<wbr>Iterations</a>
-					</li>
-					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/_modules_map_interfaces_generator_.mapheight.html" class="tsd-kind-icon">Map<wbr>Height</a>
-					</li>
-					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/_modules_map_interfaces_generator_.mapwidth.html" class="tsd-kind-icon">Map<wbr>Width</a>
-					</li>
-					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/_modules_map_interfaces_generator_.numberofpoints.html" class="tsd-kind-icon">Number<wbr>OfPoints</a>
+						<a href="../enums/_modules_map_interfaces_polygon_.strokestyle.html" class="tsd-kind-icon">Stroke<wbr>Style</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_modules_map_interfaces_generator_.mapgeneratorcontract.html" class="tsd-kind-icon">Map<wbr>Generator<wbr>Contract</a>
+						<a href="_modules_map_interfaces_polygon_.ipolygon.html" class="tsd-kind-icon">IPolygon</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_modules_map_interfaces_generator_.mapgeneratorcontract.html#size" class="tsd-kind-icon">size</a>
+								<a href="_modules_map_interfaces_polygon_.ipolygon.html#coords" class="tsd-kind-icon">coords</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_modules_map_interfaces_generator_.mapgeneratorcontract.html#type" class="tsd-kind-icon">type</a>
+								<a href="_modules_map_interfaces_polygon_.ipolygon.html#fillstyle" class="tsd-kind-icon">fill<wbr>Style</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_modules_map_interfaces_polygon_.ipolygon.html#index" class="tsd-kind-icon">index</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_modules_map_interfaces_polygon_.ipolygon.html#shapes" class="tsd-kind-icon">shapes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_modules_map_interfaces_polygon_.ipolygon.html#statistics" class="tsd-kind-icon">statistics</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_modules_map_interfaces_polygon_.ipolygon.html#strokestyle" class="tsd-kind-icon">stroke<wbr>Style</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_modules_map_interfaces_polygon_.ipolygon.html#type" class="tsd-kind-icon">type</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_modules_map_interfaces_generator_.html#mapsize" class="tsd-kind-icon">Map<wbr>Size</a>
+						<a href="../modules/_modules_map_interfaces_polygon_.html#polygontypes" class="tsd-kind-icon">Polygon<wbr>Types</a>
 					</li>
 				</ul>
 			</nav>

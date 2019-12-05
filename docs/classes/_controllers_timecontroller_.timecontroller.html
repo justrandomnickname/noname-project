@@ -67,6 +67,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Controller for <a href="_assembly_time_.time.html">Time</a></p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -88,7 +95,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_controllers_timecontroller_.timecontroller.html#time" class="tsd-kind-icon">time</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_controllers_timecontroller_.timecontroller.html#timehandler" class="tsd-kind-icon">Time<wbr>Handler</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -107,13 +114,13 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="time" class="tsd-anchor"></a>
-					<h3>time</h3>
-					<div class="tsd-signature tsd-kind-icon">time<span class="tsd-signature-symbol">:</span> <a href="_assembly_time_.time.html" class="tsd-signature-type">Time</a><span class="tsd-signature-symbol"> =&nbsp;new Time()</span></div>
+					<a name="timehandler" class="tsd-anchor"></a>
+					<h3>Time<wbr>Handler</h3>
+					<div class="tsd-signature tsd-kind-icon">Time<wbr>Handler<span class="tsd-signature-symbol">:</span> <a href="_assembly_time_.time.html" class="tsd-signature-type">Time</a><span class="tsd-signature-symbol"> =&nbsp;new Time()</span></div>
 					<aside class="tsd-sources">
-						<p>Implementation of <a href="../interfaces/_controllers_timecontroller_.itimecontroller.html">ITimeController</a>.<a href="../interfaces/_controllers_timecontroller_.itimecontroller.html#time">time</a></p>
+						<p>Implementation of <a href="../interfaces/_controllers_timecontroller_.itimecontroller.html">ITimeController</a>.<a href="../interfaces/_controllers_timecontroller_.itimecontroller.html#timehandler">TimeHandler</a></p>
 						<ul>
-							<li>Defined in Controllers/TimeController.ts:9</li>
+							<li>Defined in <a href="https://github.com/justrandomnickname/noname-project/blob/71dbfa5/src/Controllers/TimeController.ts#L12">Controllers/TimeController.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -130,19 +137,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Controllers/TimeController.ts:23</li>
+									<li>Defined in <a href="https://github.com/justrandomnickname/noname-project/blob/71dbfa5/src/Controllers/TimeController.ts#L26">Controllers/TimeController.ts:26</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter">
-									<h5>day<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+									<h5>Day<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li class="tsd-parameter">
-									<h5>hour<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+									<h5>Hour<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li class="tsd-parameter">
-									<h5>month<span class="tsd-signature-symbol">: </span><a href="../enums/_assembly_time_.monthenum.html" class="tsd-signature-type">MonthEnum</a></h5>
+									<h5>Month<span class="tsd-signature-symbol">: </span><a href="../enums/_assembly_time_.time.months.html" class="tsd-signature-type">Months</a></h5>
 								</li>
 							</ul>
 						</li>
@@ -158,7 +165,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Controllers/TimeController.ts:11</li>
+									<li>Defined in <a href="https://github.com/justrandomnickname/noname-project/blob/71dbfa5/src/Controllers/TimeController.ts#L14">Controllers/TimeController.ts:14</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -169,16 +176,33 @@
 					<a name="settime" class="tsd-anchor"></a>
 					<h3>Set<wbr>Time</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">Set<wbr>Time<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_assembly_time_.time.html#settime" class="tsd-signature-type">SetTime</a></li>
+						<li class="tsd-signature tsd-kind-icon">Set<wbr>Time<span class="tsd-signature-symbol">(</span>time<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Controllers/TimeController.ts:19</li>
+									<li>Defined in <a href="https://github.com/justrandomnickname/noname-project/blob/71dbfa5/src/Controllers/TimeController.ts#L22">Controllers/TimeController.ts:22</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="_assembly_time_.time.html#settime" class="tsd-signature-type">SetTime</a></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>time: <span class="tsd-signature-type">object</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>Day<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>Hour<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>Month<span class="tsd-signature-symbol">: </span><a href="../enums/_assembly_time_.time.months.html" class="tsd-signature-type">Months</a></h5>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -192,7 +216,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Controllers/TimeController.ts:15</li>
+									<li>Defined in <a href="https://github.com/justrandomnickname/noname-project/blob/71dbfa5/src/Controllers/TimeController.ts#L18">Controllers/TimeController.ts:18</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -209,9 +233,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in Controllers/TimeController.ts:27</li>
+									<li>Defined in <a href="https://github.com/justrandomnickname/noname-project/blob/71dbfa5/src/Controllers/TimeController.ts#L35">Controllers/TimeController.ts:35</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Subscrubes on time change. Will provide a new time value every tick in callback if time is currently running.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -219,6 +248,8 @@
 								</li>
 								<li>
 									<h5>callback: <span class="tsd-signature-type">React.Dispatch</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">React.SetStateAction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -246,7 +277,7 @@
 						<a href="_controllers_timecontroller_.timecontroller.html" class="tsd-kind-icon">Time<wbr>Controller</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_controllers_timecontroller_.timecontroller.html#time" class="tsd-kind-icon">time</a>
+								<a href="_controllers_timecontroller_.timecontroller.html#timehandler" class="tsd-kind-icon">Time<wbr>Handler</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_controllers_timecontroller_.timecontroller.html#gettime" class="tsd-kind-icon">Get<wbr>Time</a>
