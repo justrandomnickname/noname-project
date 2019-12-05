@@ -18,6 +18,7 @@ build/*
 .node_modules/*
 config/*
 scripts/*
+docs/*
 
 
 # .ts .js Files #

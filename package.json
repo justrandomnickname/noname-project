@@ -122,7 +122,7 @@
     "build": "npm run build:react && npm build:electron",
     "postinstall": "electron-builder install-app-deps",
     "rebuild": "electron-rebuild -f -w realm",
-    "docs": "typedoc --readme README.md --name typedin --out ./docs/ --tsconfig tsconfig.prod.json --excludePrivate --excludeExternals --exclude **/*.test.ts"
+    "docs": "typedoc --readme README.md --name typedin --out ./docs/ --tsconfig tsconfig.json --excludePrivate --excludeExternals --options ./typedoc.config.js"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -9,6 +9,8 @@ README.md
 .eslintrc.js
 .prettierrc.js
 webpack.config.js
+typedoc.config.js
+tsconfig.json
 
 # Package files #
 package.json
