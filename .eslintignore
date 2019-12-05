@@ -17,6 +17,7 @@ package-lock.json
 
 # Folders #
 build/*
+docs/*
 .node_modules/*
 config/*
 scripts/*
