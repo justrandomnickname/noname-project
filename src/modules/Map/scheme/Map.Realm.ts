@@ -1,7 +1,7 @@
 import Realm from 'realm'
 import { getConfiguration } from '../../../../realms/configs'
-import { MapSchema } from '@Map/interfaces/MapSchema'
-import { Polygon } from '@Map/interfaces/Polygon'
+import { IMapSchema } from '@Map/interfaces/MapSchema'
+import { IPolygon } from '@Map/interfaces/Polygon'
 import { MapSize } from '@Map/interfaces/Generator'
 import RealmConfigs from '../../../assembly/Realm'
 
@@ -100,7 +100,7 @@ class Points {
   }
 }
 
-class Map implements MapSchema {
+class Map implements IMapSchema {
   public static Schema: Realm.ObjectSchema = {
     name: 'Map',
     primaryKey: 'id',
@@ -140,12 +140,12 @@ class Map implements MapSchema {
   public id: string
   public type: string
   public size: MapSize
-  public polygons: Polygon[]
+  public polygons: IPolygon[]
   public points: Array<number[]>
   public width: number
   public height: number
 
-  constructor(payload: MapSchema) {
+  constructor(payload: IMapSchema) {
     this.id = payload.id
     this.type = payload.type
     this.size = payload.size
@@ -155,12 +155,12 @@ class Map implements MapSchema {
     this.height = payload.height
   }
 
-  public static adjust(map: Realm.Results<MapSchema>) {
+  public static adjust(map: Realm.Results<IMapSchema>) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const fMaps: any = map
-    const result: MapSchema[] = []
+    const result: IMapSchema[] = []
     for (const p of fMaps) {
-      const polygons: Polygon[] = []
+      const polygons: IPolygon[] = []
       const points: Array<number[]> = []
       for (let i = 0; i < p.polygons.length; i++) {
         const polygon = { ...p.polygons[i] }
@@ -177,7 +177,7 @@ class Map implements MapSchema {
         const point = p.points[i].value.map((point: { value: number }) => point.value)
         points.push(point)
       }
-      const map: MapSchema = {
+      const map: IMapSchema = {
         id: p.id,
         type: p.type,
         size: p.size,
@@ -191,27 +191,27 @@ class Map implements MapSchema {
     return result
   }
 
-  public get(): MapSchema[] {
-    const maps: Realm.Results<MapSchema> = Map.realm.objects(Map.Schema.name)
+  public get(): IMapSchema[] {
+    const maps: Realm.Results<IMapSchema> = Map.realm.objects(Map.Schema.name)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const fMaps: any = maps.filtered('id = $0', this.id)
     return Map.adjust(fMaps)
   }
 
-  public static getAll(): Realm.Results<MapSchema> {
-    const maps: Realm.Results<MapSchema> = Map.realm.objects(Map.Schema.name)
+  public static getAll(): Realm.Results<IMapSchema> {
+    const maps: Realm.Results<IMapSchema> = Map.realm.objects(Map.Schema.name)
     return maps
   }
 
-  public static getById(sessionId: string): MapSchema[] {
+  public static getById(sessionId: string): IMapSchema[] {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const map: any = Map.realm.objects(Map.Schema.name).filtered('id = $0', sessionId)
     return this.adjust(map)
   }
 
   public static getIds(): string[] {
-    const maps: Realm.Results<MapSchema> = Map.realm.objects(Map.Schema.name)
-    const ids = maps.map((map: MapSchema) => map.id)
+    const maps: Realm.Results<IMapSchema> = Map.realm.objects(Map.Schema.name)
+    const ids = maps.map((map: IMapSchema) => map.id)
     console.log(maps)
     return ids
   }

@@ -1,22 +1,18 @@
 import Canvas from '@Map/assembly/Canvas'
-import { MapSchema } from '@Map/interfaces/MapSchema'
+import { IMapSchema } from '@Map/interfaces/MapSchema'
 
 interface ICanvasController {
-  canvas: Canvas
-  map: MapSchema
-  fps: number
   Run(): void
   Stop(): void
-  // SetFps(): void
 }
 
 class CanvasController implements ICanvasController {
   public canvas: Canvas
-  public map: MapSchema
-  public requestFrame = 0
-  public fps = 1000 / 60 // 60 fps
+  private map: IMapSchema
+  private requestFrame = 0
+  private fps = 1000 / 60 // 60 fps
   constructor(
-    map: MapSchema,
+    map: IMapSchema,
     canvas: HTMLCanvasElement,
     payload: { width: number; height: number; mapWidth: number; mapHeight: number },
   ) {
@@ -24,7 +20,6 @@ class CanvasController implements ICanvasController {
     this.map = map
   }
   public Run() {
-    // this.requestFrame = webkitRequestAnimationFrame(this.RunOnFrame.bind(this))
     this.requestFrame = setInterval(() => {
       this.RunOnFrame()
     }, this.fps)
@@ -32,8 +27,7 @@ class CanvasController implements ICanvasController {
   public Stop() {
     clearInterval(this.requestFrame)
   }
-
-  public RunOnFrame() {
+  private RunOnFrame() {
     this.canvas.draw(this.map)
   }
 }

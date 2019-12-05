@@ -140,6 +140,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-typescript": "^7.7.4",
+    "@babel/preset-typescript": "^7.7.4",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@types/styled-components": "^4.1.19",
@@ -186,7 +188,8 @@
   },
   "lint-staged": {
     "*.{js,sass,ts,tsx,css,json,md}": [
-      "git add"
+      "git add",
+      "npm run husky:lint"
     ]
   },
   "jestWebpackResolver": {
@@ -251,11 +254,6 @@
     "watchPlugins": [
       "jest-watch-typeahead/filename",
       "jest-watch-typeahead/testname"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "react-app"
     ]
   }
 }

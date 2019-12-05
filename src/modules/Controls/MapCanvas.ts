@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
-import { MapSchema } from '@Map/interfaces/MapSchema'
+import { IMapSchema } from '@Map/interfaces/MapSchema'
 import { Delaunay } from 'd3-delaunay'
-import { MapControls } from '@Controls/interfaces/MapCanvas'
+import { IMapControls } from '@Controls/interfaces/MapCanvas'
 import Canvas from '@Map/assembly/Canvas'
 
 const getMousePos = (renderer: Canvas, event: MouseEvent): { x: number; y: number } => {
@@ -23,7 +23,7 @@ const getMousePos = (renderer: Canvas, event: MouseEvent): { x: number; y: numbe
   }
 }
 
-export default function MainMapControls(payload: { renderer: Canvas; map: MapSchema }): MapControls {
+export default function MainMapControls(payload: { renderer: Canvas; map: IMapSchema }): IMapControls {
   const { renderer, map } = payload
   const { canvas } = renderer
   const delaunay = Delaunay.from(map.points)

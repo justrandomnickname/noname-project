@@ -3,6 +3,8 @@
 .gitignore
 .prettierignore
 
+README.md
+
 # Configuration files #
 .eslintrc.js
 .prettierrc.js

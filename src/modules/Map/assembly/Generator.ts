@@ -1,6 +1,6 @@
 import CoreMath from '@Core/Math'
 import {
-  MapGeneratorContract,
+  IMapGeneratorContract,
   MapSize,
   NumberOfPoints,
   LloydIterations,
@@ -9,7 +9,7 @@ import {
   BorderIterations,
   EquatorExtremums,
 } from '@Map/interfaces/Generator'
-import { Polygon, FillStyle, StrokeStyle, PolygonTypes } from '@Map/interfaces/Polygon'
+import { IPolygon, FillStyle, StrokeStyle, PolygonTypes } from '@Map/interfaces/Polygon'
 import { Delaunay } from 'd3-delaunay'
 import { Guid } from 'guid-typescript'
 
@@ -18,17 +18,17 @@ import { Guid } from 'guid-typescript'
  * @public @sealed
  * @SANITY_UNDER_ATTACK
  */
-class Generator implements MapGeneratorContract {
-  /**{@inheritdoc} MapGeneratorContract */
+class Generator implements IMapGeneratorContract {
+  /**{@inheritdoc} IMapGeneratorContract */
   public id = Guid.create().toJSON().value
   public type: string
   public size: MapSize
   public points: Array<number[]> = []
-  public polygons: Polygon[] = []
+  public polygons: IPolygon[] = []
   public width: number
   public height: number
   public delaunay: Delaunay<[]> = new Delaunay([])
-  constructor(payload: MapGeneratorContract) {
+  constructor(payload: IMapGeneratorContract) {
     this.type = payload.type
     this.size = payload.size
     this.width = MapWidth[payload.size]
@@ -94,7 +94,7 @@ class Generator implements MapGeneratorContract {
       //   const newNeighbors = this.getNeighbors(neighbors[index])
       //   neighbors = neighbors.concat(newNeighbors)
       // }
-      average = neighbors.reduce((accumulator: number, polygon: Polygon) => accumulator + polygon.statistics.temp, 0)
+      average = neighbors.reduce((accumulator: number, polygon: IPolygon) => accumulator + polygon.statistics.temp, 0)
       average /= neighbors.length
       const random = Number.parseFloat(average.toFixed(1))
       const currentTemp = this.maxMin(random - 20, random + 20)
@@ -113,7 +113,7 @@ class Generator implements MapGeneratorContract {
         neighbors = neighbors.concat(newNeighbors)
       }
       average = neighbors.reduce(
-        (accumulator: number, polygon: Polygon) => accumulator + polygon.statistics.current.temp,
+        (accumulator: number, polygon: IPolygon) => accumulator + polygon.statistics.current.temp,
         0,
       )
       average /= neighbors.length
@@ -122,11 +122,11 @@ class Generator implements MapGeneratorContract {
     }
 
     let totalAverage = this.polygons.reduce(
-      (accumulator: number, polygon: Polygon) => accumulator + polygon.statistics.temp,
+      (accumulator: number, polygon: IPolygon) => accumulator + polygon.statistics.temp,
       0,
     )
     let totalAverageCurrent = this.polygons.reduce(
-      (accumulator: number, polygon: Polygon) => accumulator + polygon.statistics.current.temp,
+      (accumulator: number, polygon: IPolygon) => accumulator + polygon.statistics.current.temp,
       0,
     )
     totalAverage /= this.polygons.length
@@ -151,7 +151,7 @@ class Generator implements MapGeneratorContract {
       if (this.polygons[randomPoint].type === 'JUST_CREATED') {
         this.polygons[randomPoint].type = type
         this.polygons[randomPoint].fillStyle = FillStyle[type]
-        let neighborArray = this.createPlot(this.polygons[randomPoint], (polygon: Polygon) => {
+        let neighborArray = this.createPlot(this.polygons[randomPoint], (polygon: IPolygon) => {
           if (polygon.type === 'JUST_CREATED') {
             polygon.type = type
           }
@@ -163,12 +163,12 @@ class Generator implements MapGeneratorContract {
           const closestPolygon = this.findClosest(
             randomNeighbor,
             this.polygons,
-            (polygon: Polygon) => polygon.type === 'JUST_CREATED',
+            (polygon: IPolygon) => polygon.type === 'JUST_CREATED',
           )
           if (closestPolygon) {
             closestPolygon.type = type
             closestPolygon.fillStyle = FillStyle[type]
-            neighborArray = this.createPlot(closestPolygon, (polygon: Polygon) => {
+            neighborArray = this.createPlot(closestPolygon, (polygon: IPolygon) => {
               if (polygon.type === 'JUST_CREATED') {
                 polygon.type = type
                 polygon.fillStyle = FillStyle[type]
@@ -182,9 +182,9 @@ class Generator implements MapGeneratorContract {
     }
   }
 
-  private createPlot(position: Polygon, callback: (polygon: Polygon) => Polygon): Polygon[] {
+  private createPlot(position: IPolygon, callback: (polygon: IPolygon) => IPolygon): IPolygon[] {
     const dNeighbors = this.delaunay.neighbors(position.index)
-    const neighbors: Polygon[] = []
+    const neighbors: IPolygon[] = []
     let done: boolean | undefined = false
 
     while (!done) {
@@ -200,9 +200,9 @@ class Generator implements MapGeneratorContract {
     return neighbors
   }
 
-  private getNeighbors(position: Polygon): Polygon[] {
+  private getNeighbors(position: IPolygon): IPolygon[] {
     const dNeighbors = this.delaunay.neighbors(position.index)
-    const neighbors: Polygon[] = []
+    const neighbors: IPolygon[] = []
     let done: boolean | undefined = false
     while (!done) {
       const iterator = dNeighbors.next()
@@ -219,8 +219,8 @@ class Generator implements MapGeneratorContract {
     return Math.sqrt(Math.pow(point1[0] - point2[0], 2) + Math.pow(point1[1] - point2[1], 2))
   }
 
-  private findClosest(position: Polygon, polygons: Polygon[], callback?: (polygon: Polygon) => boolean) {
-    let closest: Polygon = polygons[0]
+  private findClosest(position: IPolygon, polygons: IPolygon[], callback?: (polygon: IPolygon) => boolean) {
+    let closest: IPolygon = polygons[0]
     let closestDistance = this.squarify(position.coords, closest.coords)
     for (let i = 0; i < polygons.length; i++) {
       const dist = this.squarify(position.coords, polygons[i].coords)
@@ -330,7 +330,7 @@ class Generator implements MapGeneratorContract {
     }
   }
 
-  private relaxPolygon(polygon: Polygon) {
+  private relaxPolygon(polygon: IPolygon) {
     const n = polygon.shapes.length
     let i = -1,
       x = 0,

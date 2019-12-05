@@ -5,7 +5,7 @@ import Loader from '@Loader/index'
 import { Wrapper } from '@Map/components/Wrapper'
 import MapController from '@Controllers/MapController'
 import { MapSize } from '@Map/interfaces/Generator'
-import { MapSchema } from '@Map/interfaces/MapSchema'
+import { IMapSchema } from '@Map/interfaces/MapSchema'
 import TimeCounter from '@Map/components/TimeCounter'
 
 interface IProps {
@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const MainMap: React.FC<IProps> = (props: IProps) => {
-  const [map, setMap] = useState<{} | MapSchema>({})
+  const [map, setMap] = useState<{} | IMapSchema>({})
   const [loaderState, loaderDispatch] = useReducer(Loader.Store, Loader.initialState)
   const controller = new MapController(loaderDispatch)
   const Context = React.createContext({ map })

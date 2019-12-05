@@ -1,4 +1,4 @@
-import { Polygon } from './Polygon'
+import { IPolygon } from './Polygon'
 import { MapWidth, MapHeight, MapSize } from './Generator'
 
 /**
@@ -7,11 +7,11 @@ import { MapWidth, MapHeight, MapSize } from './Generator'
  * @type {Type}
  * @param points `Array<number[]>
  */
-export interface MapSchema {
+export interface IMapSchema {
   id: string
   type: string
   size: MapSize
-  polygons: Polygon[]
+  polygons: IPolygon[]
   points: Array<number[]>
   width: MapWidth
   height: MapHeight

@@ -5,7 +5,7 @@ import Registry from '@Map/model/Registry'
 import Realm from '@Map/scheme/Map.Realm'
 import { IMapController } from './interfaces/IMapController'
 import { MapSize } from '@Map/interfaces/Generator'
-import { MapSchema } from '@Map/interfaces/MapSchema'
+import { IMapSchema } from '@Map/interfaces/MapSchema'
 import Data from '@Core/Data'
 
 class MapController implements IMapController {
@@ -52,7 +52,7 @@ class MapController implements IMapController {
     }
     return ''
   }
-  public Subscribe(stateHandler: React.Dispatch<React.SetStateAction<{} | MapSchema>>) {
+  public Subscribe(stateHandler: React.Dispatch<React.SetStateAction<{} | IMapSchema>>) {
     const registry = Registry.subscribe(stateHandler)
     return {
       unsubscribe: registry.unsubscribe,

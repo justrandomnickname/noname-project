@@ -24,7 +24,7 @@ export enum StrokeStyle {
   'HIDDEN' = 'black',
 }
 
-export interface Polygon {
+export interface IPolygon {
   type: PolygonTypes
   fillStyle: FillStyle
   strokeStyle: StrokeStyle

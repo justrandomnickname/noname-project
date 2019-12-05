@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useWait } from 'react-wait'
 import CanvasController from '@Controllers/CanvasController'
-import { MapSchema } from '@Map/interfaces/MapSchema'
+import { IMapSchema } from '@Map/interfaces/MapSchema'
 import { Wrapper } from '@Map/components/Wrapper'
 import UI from '@Core/UI'
 import CanvasRenderer from '@Map/assembly/Canvas'
@@ -19,7 +19,7 @@ const CanvasElement = styled.canvas`
 interface IProps {
   width: number
   height: number
-  map: MapSchema
+  map: IMapSchema
 }
 
 const Canvas: React.FC<IProps> = (props: IProps) => {

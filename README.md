@@ -1,11 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-
 ## WINDOWS
 npm install -g windows-build-tools
 
 ##ENVS
 FAST_DEPLOY = "YES" | "NOPE"
+
+##CONFIGS
+node_modules/babel-preset-react-app/create.js @babel/preset-typescript should be with {allowNamespaces: true}
 
 ## Available Scripts
 

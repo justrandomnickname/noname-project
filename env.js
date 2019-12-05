@@ -5,5 +5,4 @@
 module.exports = {
   FAST_DEPLOY: true,
   ELECTRON: false,
-  hui: 'hui',
 }

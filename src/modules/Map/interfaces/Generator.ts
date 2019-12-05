@@ -28,7 +28,7 @@ export enum MapWidth {
   large = 6500,
 }
 
-export interface MapGeneratorContract {
+export interface IMapGeneratorContract {
   type: string
   size: MapSize
 }

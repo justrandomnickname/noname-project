@@ -22,6 +22,7 @@ module.exports = {
     "@typescript-eslint/camelcase": "off",
     // "@typescript-eslint/interface-name-prefix": "never"
     "@typescript-eslint/interface-name-prefix": ["error", { "prefixWithI": "always" } ],
+    "@typescript-eslint/no-namespace": "off",
   },
   settings: {
     react: {

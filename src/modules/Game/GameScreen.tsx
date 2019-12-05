@@ -1,9 +1,11 @@
 import React from 'react'
 import { Wrapper } from '@Game/views/Wrapper'
-// import UI from '@Core/UI'
-import { Props } from './interfaces/GameScreen'
 
-const GameScreen: React.FC<Props> = (props: Props) => {
+export interface IProps {
+  children: React.ReactNode
+}
+
+const GameScreen: React.FC<IProps> = (props: IProps) => {
   return <Wrapper>{props.children}</Wrapper>
 }
 

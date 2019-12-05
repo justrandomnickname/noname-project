@@ -1,18 +1,25 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const remote = require('electron').remote
 const electronFs = remote.require('fs')
-import path from 'path'
+const path = require('path')
 
+/**
+ * Class for managing realms AKA db instances as files. It doesn't provide any implementation.
+ * Responsible for READ, COPY and CREATE db instances through electron fs library. Every process should be synced with main thread.
+ * @static
+ */
 class Realm {
   private static Folder = path.dirname('') + '/realms'
   public static Path = process.env.NODE_ENV === 'development' ? 'realms/dev/' : 'realms/'
-  public static Map = 'Map.realm'
   public static FileNames = ['Map.realm', 'Map.realm.lock']
+  public static Map = 'map'
 
+  /**
+   * Initializing dev folder, if isn't exist. Every object, created in development mode will be stored into dev realm files.
+   */
   public static initDevRealm() {
     const files: string[] = []
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    electronFs.readdirSync(Realm.Folder + '/dev').forEach((element: any) => {
+    electronFs.readdirSync(Realm.Folder + '/dev').forEach((element: string) => {
       files.push(element)
     })
 
@@ -37,7 +44,5 @@ class Realm {
     }
   }
 }
-
-Realm.initDevRealm()
 
 export default Realm

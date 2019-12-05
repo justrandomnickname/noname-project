@@ -1,6 +1,6 @@
 import React from 'react'
 import onChange from 'on-change'
-import { MapSchema } from '@Map/interfaces/MapSchema'
+import { IMapSchema } from '@Map/interfaces/MapSchema'
 
 interface ISubscribe {
   unsubscribe: () => void
@@ -11,14 +11,14 @@ interface IWatcher {
   unsubscribe?: ({}) => void
 }
 
-type StateType = { [id: string]: MapSchema }
+type StateType = { [id: string]: IMapSchema }
 
 class Registry {
-  public static current: MapSchema | {} = {}
+  public static current: IMapSchema | {} = {}
   public static maps: StateType = {}
   public static Watcher: IWatcher = { count: 0 }
 
-  public static subscribe(setState: React.Dispatch<React.SetStateAction<{} | MapSchema>>): ISubscribe {
+  public static subscribe(setState: React.Dispatch<React.SetStateAction<{} | IMapSchema>>): ISubscribe {
     Registry.Watcher = onChange(Registry.Watcher, () => {
       setState(Registry.current)
     })
@@ -29,7 +29,7 @@ class Registry {
     }
   }
 
-  public static set(map: MapSchema) {
+  public static set(map: IMapSchema) {
     Registry.maps = Object.assign({}, Registry.maps, { [map.id]: map })
   }
 

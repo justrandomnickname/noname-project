@@ -1,5 +1,5 @@
-import { MapSchema } from '@Map/interfaces/MapSchema'
-import { Polygon } from '@Map/interfaces/Polygon'
+import { IMapSchema } from '@Map/interfaces/MapSchema'
+import { IPolygon } from '@Map/interfaces/Polygon'
 import { MapWidth, MapHeight, EquatorExtremums } from '@Map/interfaces/Generator'
 import { IActiveEntity } from '../assembly/interfaces/IActiveEntity'
 import ActiveEntity from './ActiveEntity'
@@ -38,7 +38,7 @@ class Canvas {
     this.ActiveEntities[0].EstablishPath(coordinates)
   }
 
-  public draw(map: MapSchema) {
+  public draw(map: IMapSchema) {
     const { zoomfactor } = this
     this.context.clearRect(0, 0, this.width, this.height)
     this.context.setTransform(
@@ -61,7 +61,7 @@ class Canvas {
     this.DrawEntities()
   }
 
-  public drawPolygon(polygon: Polygon) {
+  public drawPolygon(polygon: IPolygon) {
     let index = polygon.shapes.length - 1
     this.context.beginPath()
     this.context.strokeStyle = polygon.strokeStyle

@@ -1,11 +1,11 @@
 import React, { useLayoutEffect, useState } from 'react'
 import UI from '@Core/UI'
 import TimeController from '@Controllers/TimeController'
-import { MonthEnum } from 'assembly/Time'
+import { Time } from 'assembly/Time'
 
 const TimeCounter: React.FC<{}> = () => {
   const timeController = new TimeController()
-  const [time, setTime] = useState<{ month: MonthEnum; hour: number; day: number }>(timeController.GetTime())
+  const [time, setTime] = useState<{ Month: Time.Months; Hour: number; Day: number }>(timeController.GetTime())
   useLayoutEffect(() => {
     timeController.SubscribeOnTimeChange('MainMapTime', setTime)
     timeController.RunTime()
@@ -18,7 +18,7 @@ const TimeCounter: React.FC<{}> = () => {
     <UI.Title>
       TIME:
       <UI.RegularText>
-        Month {time.month} - Day {time.day} - Hour {time.hour}
+        Month {time.Month} - Day {time.Day} - Hour {time.Hour}
       </UI.RegularText>
     </UI.Title>
   )
