@@ -53,8 +53,8 @@ const Canvas: React.FC<IProps> = (props: IProps) => {
       const newPosX = event.screenX - current.screenX
       const newPosY = event.screenY - current.screenY
       // console.log('NEWPOSX', renderer.position[0])
-      renderer.position[0] += newPosX
-      renderer.position[1] += newPosY
+      renderer.position[0] += newPosX / renderer.zoomfactor
+      renderer.position[1] += newPosY / renderer.zoomfactor
       // renderer.draw(props.map)
     })
   }
