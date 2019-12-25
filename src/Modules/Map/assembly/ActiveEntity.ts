@@ -24,23 +24,23 @@ class ActiveEntity implements IActiveEntity {
    * @param coordinates
    */
   public EstablishPath(coordinates: number[]): void {
-    // console.log('PATH ESTABLISHED', coordinates)
-    // console.log('STARTING POSITION IS', this.position)
-    this.isActive = true
-    const dx = coordinates[0] - this.position[0]
-    const dy = coordinates[1] - this.position[1]
+    let dx, dy
+    if (this.route.length !== 0) {
+      const lastRoute = this.route[this.route.length - 1]
+      dx = coordinates[0] - lastRoute.coordinates[0]
+      dy = coordinates[1] - lastRoute.coordinates[1]
+    } else {
+      dx = coordinates[0] - this.position[0]
+      dy = coordinates[1] - this.position[1]
+    }
     const dist = Math.hypot(dx, dy)
     const speed: number[] = [dx / dist, dy / dist]
-    // console.log('DX / DIST', dx / dist)
-    // console.log('DX IS', dx)
-    // console.log('DY IS', dy)
-    // console.log('DISTANCE IS', dist)
-    // console.log('SPEED IS', speed)
     const route = {
       nextPositionTick: speed,
       coordinates,
     }
     this.route.push(route)
+    this.isActive = true
   }
 
   /**
@@ -49,6 +49,7 @@ class ActiveEntity implements IActiveEntity {
    */
   private EndPath(): void {
     this.route.shift()
+    if (this.route.length === 0) this.isActive = false
   }
 
   /**
@@ -67,7 +68,6 @@ class ActiveEntity implements IActiveEntity {
       this.position[1] += currentRoute.nextPositionTick[1]
     } else {
       this.EndPath()
-      this.isActive = false
     }
   }
 }

@@ -12,7 +12,7 @@ class Realm {
   private static Folder = path.dirname('') + '/realms'
   public static Path = process.env.NODE_ENV === 'development' ? 'realms/dev/' : 'realms/'
   public static FileNames = ['Map.realm', 'Map.realm.lock']
-  public static Map = 'map'
+  public static Map = 'Map.realm'
 
   /**
    * Initializing dev folder, if isn't exist. Every object, created in development mode will be stored into dev realm files.

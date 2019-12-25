@@ -4,7 +4,7 @@ import { MapWidth, MapHeight, EquatorExtremums } from '@Map/interfaces/Generator
 import { IActiveEntity } from '../assembly/interfaces/IActiveEntity'
 import ActiveEntity from './ActiveEntity'
 
-class Canvas {
+export class Canvas implements Canvas.ICanvas {
   public canvas: HTMLCanvasElement
   public context: CanvasRenderingContext2D
   public MAP_VIEWPORT = 1
@@ -49,7 +49,7 @@ class Canvas {
       this.position[0] * zoomfactor + (-(zoomfactor - 1) * this.canvasWidth) / 2,
       this.position[1] * zoomfactor + (-(zoomfactor - 1) * this.canvasHeight) / 2,
     )
-    this.context.lineWidth = 1
+    this.context.lineWidth = Canvas.CanvasValues.POLYGON_LINE_WIDTH
     let index = map.polygons.length - 1
     do {
       this.drawPolygon(map.polygons[index])
@@ -61,10 +61,10 @@ class Canvas {
     this.DrawEntities()
   }
 
-  public drawPolygon(polygon: IPolygon) {
+  private drawPolygon(polygon: IPolygon) {
     let index = polygon.shapes.length - 1
     this.context.beginPath()
-    this.context.strokeStyle = polygon.strokeStyle
+    this.context.strokeStyle = '#292826'
     this.context.fillStyle = polygon.fillStyle
     this.context.moveTo(polygon.shapes[0][0], polygon.shapes[0][1])
     do {
@@ -75,7 +75,7 @@ class Canvas {
     this.context.closePath()
   }
 
-  public DrawEntities() {
+  private DrawEntities() {
     for (let i = 0; i < this.ActiveEntities.length; i++) {
       const current = this.ActiveEntities[i]
       if (current.isActive) current.FollowRouteOnTick()
@@ -85,7 +85,7 @@ class Canvas {
 
   private DrawEntity(entity: IActiveEntity) {
     this.context.beginPath()
-    this.context.arc(entity.position[0], entity.position[1], 30, 0, 2 * Math.PI, false)
+    this.context.arc(entity.position[0], entity.position[1], 10, 0, 2 * Math.PI, false)
     this.context.stroke()
     this.context.closePath()
   }
@@ -129,6 +129,16 @@ class Canvas {
     // this.context.arc(this.width / 2, this.height / 2, 100, 0, 2 * Math.PI, false)
     // this.context.stroke()
     // this.context.closePath()
+  }
+}
+
+export namespace Canvas {
+  export interface ICanvas {
+    draw: (map: IMapSchema) => void
+  }
+
+  export enum CanvasValues {
+    POLYGON_LINE_WIDTH = 4,
   }
 }
 

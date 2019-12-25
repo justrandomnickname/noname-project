@@ -32,6 +32,7 @@ const Canvas: React.FC<IProps> = (props: IProps) => {
     controls.onClick((point: number) => {
       const polygon = props.map.polygons.find(polygon => polygon.index === point)
       if (polygon) {
+        renderer.testRoutePush([polygon.coords[0], polygon.coords[1]])
         setPolygon(polygon)
         endWaiting('polygon')
       }

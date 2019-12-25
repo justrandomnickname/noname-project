@@ -34,7 +34,6 @@ export default function MainMapControls(payload: { renderer: Canvas; map: IMapSc
     canvas.onclick = (event: MouseEvent) => {
       const mousePosition = getMousePos(renderer, event)
       const index = delaunay.find(mousePosition.x, mousePosition.y)
-      renderer.testRoutePush([mousePosition.x, mousePosition.y])
       onClickCallback(index)
     }
   }
