@@ -4,9 +4,8 @@ import CanvasController from '@Controllers/CanvasController'
 import { IMapSchema } from '@Map/interfaces/MapSchema'
 import { Wrapper } from '@Map/components/Wrapper'
 import UI from '@Core/UI'
-import CanvasRenderer from '@Map/assembly/Canvas'
-import Controls from '@Controls/MapCanvas'
 import styled from 'styled-components'
+import { IPolygon } from '@Map/interfaces/Polygon'
 
 const CanvasElement = styled.canvas`
   width: ${props => props.width + 'px'};
@@ -27,52 +26,32 @@ const Canvas: React.FC<IProps> = (props: IProps) => {
   const [polygon, setPolygon] = useState(props.map.polygons[0])
   const { startWaiting, endWaiting, Wait } = useWait()
 
-  const registerControls = (canvas: HTMLCanvasElement, renderer: CanvasRenderer) => {
-    const controls = Controls({ renderer, map: props.map })
-    controls.onClick((point: number) => {
-      const polygon = props.map.polygons.find(polygon => polygon.index === point)
-      if (polygon) {
-        renderer.testRoutePush([polygon.coords[0], polygon.coords[1]])
-        setPolygon(polygon)
-        endWaiting('polygon')
-      }
-    })
-    controls.onWheel((event: MouseWheelEvent) => {
-      if (event.deltaY < 0) {
-        renderer.zoomfactor *= 1.1
-      }
-      if (event.deltaY > 0) {
-        renderer.zoomfactor /= 1.1
-      }
-
-      // console.log('ZOOMFACTOR IS', renderer.zoomfactor)
-      // console.log('POSITION IS', renderer.position[0], renderer.position[1])
-      // renderer.draw(props.map)
-    })
-    controls.onDrag((event: MouseEvent, current: { screenX: number; screenY: number }) => {
-      const newPosX = event.screenX - current.screenX
-      const newPosY = event.screenY - current.screenY
-      // console.log('NEWPOSX', renderer.position[0])
-      renderer.position[0] += newPosX / renderer.zoomfactor
-      renderer.position[1] += newPosY / renderer.zoomfactor
-      // renderer.draw(props.map)
-    })
+  const showPolygonStatistics = (polygon: IPolygon) => {
+    setPolygon(polygon)
+    endWaiting('polygon')
   }
 
   useEffect(() => {
+    let canvasController: CanvasController
     if (canvasRef.current) {
       const canvas = canvasRef.current
-      const canvasController = new CanvasController(props.map, canvas, {
+      canvasController = new CanvasController(props.map, canvas, {
         width: props.width,
         height: props.height,
         mapWidth: props.map.width,
         mapHeight: props.map.height,
       })
       startWaiting('polygon')
-      registerControls(canvas, canvasController.canvas)
+      canvasController.enableControls({
+        showPolygonStatistics,
+      })
       canvasController.Run()
     }
-    return () => {}
+    return () => {
+      if (canvasController) {
+        canvasController.Stop()
+      }
+    }
   }, [])
   if ('id' in props.map) {
     return (
