@@ -29,7 +29,7 @@ class CanvasController implements ICanvasController {
   }
   public Run() {
     Renderer.AddEntity__Dev()
-    this.requestFrame = setInterval(() => {
+    this.requestFrame = window.setInterval(() => {
       this.RunOnFrame()
     }, 0)
   }
@@ -41,8 +41,8 @@ class CanvasController implements ICanvasController {
     this.canvas.registerControls('zoomable')
     this.canvas.registerControls('draggable')
     Renderer.InitDelaunay(this.map)
-    this.enableEntityControls()
     this.enablePolygonControls(payload.showPolygonStatistics)
+    this.enableEntityControls()
     this.canvas.enableControls()
   }
 
