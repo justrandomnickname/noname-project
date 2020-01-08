@@ -60,6 +60,7 @@
     "guid-typescript": "^1.0.9",
     "html-webpack-plugin": "4.0.0-beta.5",
     "immer": "^4.0.0",
+    "inversify": "^5.0.1",
     "is-wsl": "^1.1.0",
     "jest": "24.9.0",
     "jest-environment-jsdom-fourteen": "0.1.0",
@@ -90,6 +91,7 @@
     "react-wait": "^0.3.0",
     "realm": "^3.3.0",
     "redux": "^4.0.4",
+    "reflect-metadata": "^0.1.13",
     "resolve": "1.12.0",
     "resolve-url-loader": "3.1.0",
     "semver": "6.3.0",
@@ -236,7 +238,8 @@
       "@Map(.*)$": "<rootDir>/src/Modules/Map/$1",
       "@Controls(.*)$": "<rootDir>/src/Modules/Controls/$1",
       "@Loader(.*)$": "<rootDir>/src/Modules/Loader/$1",
-      "@Controllers(.*)$": "<rootDir>/src/Controllers/$1"
+      "@Controllers(.*)$": "<rootDir>/src/Controllers/$1",
+      "@Modules(.*)$": "<rootDir>/src/Modules/$1"
     },
     "moduleFileExtensions": [
       "web.js",

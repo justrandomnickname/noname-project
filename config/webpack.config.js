@@ -305,6 +305,7 @@ module.exports = function(webpackEnv) {
         "@Controls": path.join(__dirname, '..', 'src', 'Modules', 'Controls'),
         "@Core/Data": path.resolve(__dirname, '../src/libs/Data'),
         "@Core/Math": path.resolve(__dirname, '../src/libs/Math'),
+        "@Modules": path.join(__dirname, '..', 'src', 'Modules')
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding

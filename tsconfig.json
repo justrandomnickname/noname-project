@@ -8,11 +8,14 @@
       "esnext",
       "scripthost"
     ],
+    "types": ["reflect-metadata"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -29,7 +32,8 @@
       "@Map/*": ["Modules/Map/*"],
       "@Controls/*": ["Modules/Controls/*"],
       "@Loader/*": ["Modules/Loader/*"],
-      "@Controllers/*": ["Controllers/*"]
+      "@Controllers/*": ["Controllers/*"],
+      "@Modules/*": ["Modules/*"],
     }
   },
   "include": [

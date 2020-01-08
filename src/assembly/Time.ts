@@ -30,7 +30,7 @@ export class Time implements Time.ITime {
   public RunTime(): void {
     if (!Time.Interval) {
       const tick = Time.Tick.Multiplier * Time.TimeSpeed //5 seconds
-      Time.Interval = setInterval(() => {
+      Time.Interval = window.setInterval(() => {
         this.ChangeTimeOnTick()
       }, tick)
     } else console.warn(new ERROR('assembly/Time.ts', 'Time is already running').EVENT())

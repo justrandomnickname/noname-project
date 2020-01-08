@@ -68,7 +68,7 @@ const Loader: React.FC<{ text: string }> = (props: { text: string }) => {
         LoaderParams.angle3 += 9
       }
 
-      requestId = setInterval(draw, 20)
+      requestId = window.setInterval(draw, 20)
     }
     return () => {
       clearInterval(requestId)

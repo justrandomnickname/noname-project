@@ -13,7 +13,7 @@ module.exports = {
   rules: {
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
-    'no-await-in-loop': 'error',
+    'no-await-in-loop': 'off',
     'no-console': 'off',
     'block-scoped-var': 'error',
     'default-case': 'error',

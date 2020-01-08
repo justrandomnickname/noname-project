@@ -26,7 +26,15 @@ export default class ErrorHandler {
    * @public
    */
   public OBJECT(): string {
-    return this.ArgsConcatenator('Invalid object name - ${this.at}')
+    return this.ArgsConcatenator(`Invalid object name - ${this.at}`)
+  }
+
+  /**
+   * throws VALUE error. This means that incoming in method/function value is invalid or/and didnt meet requirements.
+   * @public
+   */
+  public VALUE(): string {
+    return this.ArgsConcatenator(`Invalid value at - ${this.at}`)
   }
 
   /**

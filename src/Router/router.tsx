@@ -9,6 +9,7 @@ import { MemoryRouter } from 'react-router-dom'
 
 import MainMenu from '@UI/views/MainMenu'
 import MainMap from '@Map/views/MainMap'
+import Hideout from '@Modules/Hideout/views/Hideout'
 
 // export const FallbackMock: React.FC = () => {
 //   const [message, setMessage] = useState(0)
@@ -22,11 +23,12 @@ const AppRouter: React.FC = () => (
   <MemoryRouter>
     {/* <Suspense fallback={<FallbackMock />}> */}
     <Switch>
-      <Route exact path="/map">
+      <Route exact path="/menu">
         <MainMenu />
       </Route>
 
-      <Route path="/" component={MainMap} />
+      <Route path="/map" component={MainMap} />
+      <Route path="/" component={Hideout} />
       {/* <MainMap />
       </Route> */}
     </Switch>

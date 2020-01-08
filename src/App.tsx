@@ -1,9 +1,10 @@
-import React from "react";
-import GameScreen from "@Game/GameScreen";
-import AppRouter from "./Router/router";
-import { ThemeProvider } from "styled-components";
-import * as style from "Modules/UI/scss/variables.scss";
-import { Waiter } from "react-wait";
+import React from 'react'
+import './inversify.config'
+import GameScreen from '@Game/GameScreen'
+import AppRouter from './Router/router'
+import { ThemeProvider } from 'styled-components'
+import * as style from 'Modules/UI/scss/variables.scss'
+import { Waiter } from 'react-wait'
 
 const App: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ const App: React.FC = () => {
         </Waiter>
       </GameScreen>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App
