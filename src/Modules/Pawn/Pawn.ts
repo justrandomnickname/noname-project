@@ -1,50 +1,44 @@
-import { Guid } from 'guid-typescript'
+import { PawnBuilder } from './PawnBuilder'
 
-export class Pawn {
-  public id: string
-  public name: string
-  public age: number
-  constructor(name: string, age: number) {
-    this.id = Guid.create().toJSON().value
-    this.name = name
-    this.age = age
+export class Pawn implements Pawn.IPawn {
+  protected _firstName: string
+  protected _pic: PawnBuilder.Avatars
+  protected _gender: PawnBuilder.Genders
+  protected _alias: string | null
+  protected _key: string
+
+  constructor(pawnBuilder: PawnBuilder) {
+    this._firstName = pawnBuilder.firstName
+    this._pic = pawnBuilder.pic
+    this._gender = pawnBuilder.gender
+    this._alias = pawnBuilder.alias
+    this._key = pawnBuilder.key
+  }
+
+  get firstName() {
+    return this._firstName
+  }
+  get pic() {
+    return this._pic
+  }
+  get gender() {
+    return this._gender
+  }
+  get alias() {
+    if (this._alias) return this._alias
+    else return this._firstName
+  }
+  get key() {
+    return this._key
   }
 }
 
 export namespace Pawn {
   export interface IPawn {
-    id: string
-    name: string
-    age: number
-    race: Race
-    // appearance: IAppearance
-    gender: Gender
-    // traits: ITrait[]
-    level: number
-    exp: number
-  }
-
-  export interface IAppearance {
-    height: number
-    weight: number
-  }
-
-  export interface ITrait {
-    name: string
-  }
-
-  export interface IStats {
-    fatigue: number
-    magick: number
-    health: number
-  }
-
-  export enum Gender {
-    'Female',
-    'Male',
-  }
-
-  export enum Race {
-    'Human',
+    firstName: string
+    pic: PawnBuilder.Avatars
+    gender: PawnBuilder.Genders
+    alias: string
+    key: string
   }
 }

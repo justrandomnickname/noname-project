@@ -23,7 +23,7 @@ const AppRouter: React.FC = () => (
   <MemoryRouter>
     {/* <Suspense fallback={<FallbackMock />}> */}
     <Switch>
-      <Route exact path="/map">
+      <Route exact path="/menu">
         <MainMenu />
       </Route>
 
