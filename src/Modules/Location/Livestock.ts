@@ -32,6 +32,31 @@ export namespace Livestock {
     amount: number
   }
   export interface ILivestock {
+    gold: IResource
+    silver: IResource
+    gems: IResource
+    food: IResource
+    goods: IResource
+    materials: IResource
+    weaponsAndArmour: IResource
+    lore: IResource
+    crystals: IResource
     resources: IResource[]
+  }
+
+  export const Schema: Realm.ObjectSchema = {
+    name: 'Livestock',
+    properties: {
+      session_id: 'string',
+      gold: 'int',
+      silver: 'int',
+      gems: 'int',
+      food: 'int',
+      goods: 'int',
+      materials: 'int',
+      weaponsAndArmour: 'int',
+      lore: 'int',
+      crystals: 'int',
+    },
   }
 }

@@ -26,3 +26,6 @@ yarn-error.log*
 # Realm Objects
 *.realm.*
 *.realm
+default.realm
+default.realm.lock
+default.realm.note
