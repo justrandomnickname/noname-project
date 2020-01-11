@@ -1,3 +1,4 @@
+import Realm from 'realm'
 import { PawnBuilder } from './PawnBuilder'
 
 export class Pawn implements Pawn.IPawn {
@@ -40,5 +41,16 @@ export namespace Pawn {
     gender: PawnBuilder.Genders
     alias: string
     key: string
+  }
+
+  export const Schema: Realm.ObjectSchema = {
+    name: 'Pawn',
+    properties: {
+      firstName: 'string',
+      pic: 'string',
+      gender: 'int',
+      alias: 'string',
+      key: 'string',
+    },
   }
 }

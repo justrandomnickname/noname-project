@@ -31,7 +31,7 @@ const LocationJumperWrapper = styled.div`
 const Hideout: React.FC<{}> = () => {
   const [messages, setMessages] = useState<Message.IMessage[]>([])
   const [actions, setActions] = useState<Action.IAction[]>([])
-  const [pawns, setPawns] = useState<Pawn[]>([])
+  const [pawns, setPawns] = useState<Pawn.IPawn[]>([])
   const [livestock, setLivestock] = useState<Livestock.IResource[]>([])
   const controllers = {
     actions: new ActionsController(setActions),
@@ -46,7 +46,9 @@ const Hideout: React.FC<{}> = () => {
     controllers.actions.InjectActions('hideout_basic')
     controllers.messages.CreateDescription('hideout_description')
     return () => {
-      Object.values(controllers).forEach(controller => controller.Unmount())
+      Object.values(controllers).forEach(controller => {
+        controller.Unmount()
+      })
     }
   }, [])
   return (

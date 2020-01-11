@@ -33,7 +33,7 @@ export class MessagesController implements MessagesController.IMessagesControlle
   private async ShowMessagesSmoothly(messages: Message.IMessage[]): Promise<void> {
     for (let i = 0; i < messages.length; i++) {
       this.MountMessage(messages[i])
-      await Data.Sleep(2000)
+      await Data.Sleep(1000)
     }
   }
   public Mount() {
@@ -47,7 +47,7 @@ export class MessagesController implements MessagesController.IMessagesControlle
     MessagesController._setState = null
   }
 
-  public CreateMessage(type: MessagesController.MessagesControllerTypes, pawn: Pawn) {
+  public CreateMessage(type: MessagesController.MessagesControllerTypes, pawn: Pawn.IPawn) {
     switch (type) {
       case 'start_conversation':
         const message1 = new Dialogue({

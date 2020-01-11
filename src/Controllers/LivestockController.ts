@@ -4,28 +4,26 @@ import { Livestock } from '@Modules/Location/Livestock'
 import { getConfiguration } from '../../realms/configs'
 
 export class LivestockController implements LivestockController.ILivestockController {
-  private static Schema: Realm.ObjectSchema = Livestock.Schema
   private static _livestock: Livestock.ILivestock = new Livestock()
   private static _setState: React.Dispatch<React.SetStateAction<Livestock.IResource[]>> | null
-  constructor(setState: React.Dispatch<React.SetStateAction<Livestock.IResource[]>>) {
-    if (!LivestockController._setState) LivestockController._setState = setState
+  constructor(setState?: React.Dispatch<React.SetStateAction<Livestock.IResource[]>>) {
+    if (setState) LivestockController._setState = setState
     this.Mount.bind(this)
   }
   public Mount(): void {
     if (LivestockController._setState) LivestockController._setState([...this.livestock.resources])
-    this.Save()
   }
   public Unmount(): void {
     LivestockController._setState = null
   }
-  public Save(): void {
+  public Save(sessionId: string): void {
     const realm = new Realm({
       ...getConfiguration(),
       schema: [Livestock.Schema],
     })
     realm.write(() => {
       realm.create(Livestock.Schema.name, {
-        session_id: '0',
+        session_id: sessionId,
         gold: this.livestock.gold.amount,
         silver: this.livestock.silver.amount,
         gems: this.livestock.gems.amount,
@@ -36,8 +34,16 @@ export class LivestockController implements LivestockController.ILivestockContro
         lore: this.livestock.lore.amount,
         crystals: this.livestock.crystals.amount,
       })
-      console.log('LIVESTOCK IS', realm.objects(Livestock.Schema.name), realm.objects(Livestock.Schema.name).length)
     })
+    realm.close()
+  }
+  public Load(sessionId: string): void {
+    Realm.open({ ...getConfiguration(), schema: [Livestock.Schema] })
+      .then(realm => {
+        realm.objects(Livestock.Schema.name).filtered('session_id = $0', sessionId)
+        return realm
+      })
+      .then(realm => realm.close())
   }
   // public Load(): void {}
   get livestock(): Livestock.ILivestock {
