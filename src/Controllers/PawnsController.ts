@@ -12,7 +12,7 @@ export class PawnsController implements PawnsController.IPawnController {
     if (setState) PawnsController._setState = setState
     this.Mount = this.Mount.bind(this)
   }
-  get pawns() {
+  get pawns(): Pawn.IPawn[] {
     return PawnsController._pawns
   }
   set pawns(value: Pawn.IPawn[]) {
@@ -21,16 +21,17 @@ export class PawnsController implements PawnsController.IPawnController {
   get setState() {
     return PawnsController._setState
   }
-  public Mount() {
+  public Mount(): void {
     console.log('MOUNTED!', this.pawns[0])
     if (this.setState) this.setState([...this.pawns])
   }
-  public Unmount() {
+  public Unmount(): void {
     PawnsController._setState = null
   }
-  public Save(sessionId: string) {
+  public Save(sessionId: string, path: string): void {
     const realm = new Realm({
       ...getConfiguration(),
+      path,
       schema: [PawnsController.Schema, Pawn.Schema],
     })
     realm.write(() => {
@@ -51,46 +52,31 @@ export class PawnsController implements PawnsController.IPawnController {
         list: pawns,
       })
     })
-
-    // const ppawns: Pawn.IPawn[] = []
-    // realm.objects('PawnList').forEach((obj: any) =>
-    //   obj.list.forEach((pawn: any) =>
-    //     ppawns.push({
-    //       firstName: pawn.firstName,
-    //       alias: pawn.firstName,
-    //       pic: pawn.pic,
-    //       gender: pawn.gender,
-    //       key: pawn.key,
-    //     }),
-    //   ),
-    // )
-    // console.log('PPAWNS IS', ppawns)
-    // console.log('ORIGINAL IS', this.pawns)
     realm.close()
   }
-  public Load(sessionId: string) {
-    Realm.open({ ...getConfiguration(), schema: [PawnsController.Schema, Pawn.Schema] }).then((realm: Realm) => {
-      const pawns: Pawn.IPawn[] = []
-      realm
-        .objects('PawnList')
-        .filtered('sessionId = $0', sessionId)
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .forEach((obj: any) =>
-          obj.list.forEach((pawn: Pawn.IPawn) => {
-            pawns.push({
-              firstName: pawn.firstName,
-              pic: pawn.pic,
-              gender: pawn.gender,
-              alias: pawn.alias,
-              key: pawn.key,
-            })
-          }),
-        )
-      this.pawns = pawns
-      this.Mount()
-    })
+  public async Load(sessionId: string, path: string) {
+    const realm = new Realm({ ...getConfiguration(), path, schema: [PawnsController.Schema, Pawn.Schema] })
+    const pawns: Pawn.IPawn[] = []
+    realm
+      .objects('PawnList')
+      .filtered('sessionId = $0', sessionId)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .forEach((obj: any) =>
+        obj.list.forEach((pawn: Pawn.IPawn) => {
+          pawns.push({
+            firstName: pawn.firstName,
+            pic: pawn.pic,
+            gender: pawn.gender,
+            alias: pawn.alias,
+            key: pawn.key,
+          })
+        }),
+      )
+    realm.close()
+    this.pawns = pawns
+    this.Mount()
   }
-  public CreatePawns() {
+  public CreatePawns(): void {
     const pawns: Pawn[] = []
     for (let i = 0; i < 10; i++) {
       const builder = new PawnBuilder({ key: Data.GetPublicKey(pawns) })

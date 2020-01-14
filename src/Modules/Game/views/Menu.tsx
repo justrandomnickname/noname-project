@@ -58,6 +58,9 @@ const Menu: React.FC<{}> = () => {
     await sessionController.Save(input)
     getSaves()
   }
+  // const deleteFile = async (sessionId: string) => {
+  //   await sessionController.Delete(sessionId)
+  // }
   useLayoutEffect(() => {
     getSaves()
     return () => {}
@@ -71,6 +74,7 @@ const Menu: React.FC<{}> = () => {
         {saveFiles.map((save, index) => (
           <div key={index}>
             {save.name}: {save.id} <button onClick={() => sessionController.Load(save.id)}>Load</button>
+            <button onClick={() => sessionController.Delete(save.id)}>Delete</button>
           </div>
         ))}
       </MenuWrapper>

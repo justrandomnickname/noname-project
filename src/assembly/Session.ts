@@ -12,24 +12,23 @@ export class Session implements Session.ISession {
   constructor() {
     this.id = Guid.create().toJSON().value
   }
-  public async SaveData() {
+  public async SaveData(path: string): Promise<void> {
     const sessionId = this.id
-    new LivestockController().Save(sessionId)
-    new PawnsController().Save(sessionId)
+    new LivestockController().Save(sessionId, path)
+    new PawnsController().Save(sessionId, path)
   }
 
-  public LoadData(sessionId: string) {
-    new PawnsController().Load(sessionId)
-    new LivestockController().Load(sessionId)
+  public LoadData(sessionId: string, path: string): void {
+    new PawnsController().Load(sessionId, path)
+    new LivestockController().Load(sessionId, path)
   }
-
-  // public static setSessionId() {}
 }
 
 export namespace Session {
   export interface ISession {
     id: string
-    SaveData(): void
+    SaveData(path: string): void
+    LoadData(sessionId: string, path: string): void
   }
 
   export const Schema: Realm.ObjectSchema = {

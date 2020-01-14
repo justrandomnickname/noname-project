@@ -56,13 +56,13 @@ const Hideout: React.FC<{}> = () => {
       <LivestockComponent resources={livestock} />
       <HideoutMenu>
         <HideoutMenuElement>
-          <UI.Title>Hideout</UI.Title>
+          <UI.Title>Base location</UI.Title>
         </HideoutMenuElement>
         <HideoutMenuElement>
-          <UI.Title>Barracks</UI.Title>
+          {/* <UI.Title>Barracks</UI.Title>
         </HideoutMenuElement>
         <HideoutMenuElement>
-          <UI.Title>Hall</UI.Title>
+          <UI.Title>Hall</UI.Title> */}
         </HideoutMenuElement>
       </HideoutMenu>
       <LocationJumperWrapper>

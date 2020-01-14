@@ -16,9 +16,10 @@ export class LivestockController implements LivestockController.ILivestockContro
   public Unmount(): void {
     LivestockController._setState = null
   }
-  public Save(sessionId: string): void {
+  public Save(sessionId: string, path: string): void {
     const realm = new Realm({
       ...getConfiguration(),
+      path,
       schema: [Livestock.Schema],
     })
     realm.write(() => {
@@ -37,13 +38,22 @@ export class LivestockController implements LivestockController.ILivestockContro
     })
     realm.close()
   }
-  public Load(sessionId: string): void {
-    Realm.open({ ...getConfiguration(), schema: [Livestock.Schema] })
-      .then(realm => {
-        realm.objects(Livestock.Schema.name).filtered('session_id = $0', sessionId)
-        return realm
-      })
-      .then(realm => realm.close())
+  public Load(sessionId: string, path: string): void {
+    const realm = new Realm({ ...getConfiguration(), path, schema: [Livestock.Schema] })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const livestock: any = realm.objects(Livestock.Schema.name).filtered('session_id = $0', sessionId)
+    LivestockController._livestock = new Livestock(
+      livestock[0].gold,
+      livestock[0].silver,
+      livestock[0].gems,
+      livestock[0].food,
+      livestock[0].goods,
+      livestock[0].materials,
+      livestock[0].weaponsAndArmour,
+      livestock[0].lore,
+      livestock[0].crystals,
+    )
+    realm.close()
   }
   // public Load(): void {}
   get livestock(): Livestock.ILivestock {
