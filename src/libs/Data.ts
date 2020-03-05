@@ -16,6 +16,11 @@ function thunkate(func: () => void) {
   }
 }
 
+function isGuid(target: any, propertyKey: string | symbol) {
+  console.log('PROPERTY KEY IS', propertyKey)
+  console.log('TARGET IS', target)
+}
+
 function GetPublicKey<T extends Array<{ key: string }>>(iterableArray: T): string {
   let key = Guid.create().toJSON().value
   if (iterableArray.length !== 0 && 'key' in iterableArray[0]) {
@@ -40,4 +45,5 @@ export default {
   Sleep,
   GetPublicKey,
   thunkate,
+  isGuid,
 }

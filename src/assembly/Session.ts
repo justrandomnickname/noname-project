@@ -1,13 +1,42 @@
 import { Guid } from 'guid-typescript'
+import Realm from 'realm'
+import { LivestockController } from '@Controllers/LivestockController'
+import { PawnsController } from '@Controllers/PawnsController'
 
 /**
  * not implemented yet...
  */
-class Session {
-  public static SESSION_ID: string = Guid.create().toJSON().value
+export class Session implements Session.ISession {
   public static START_SESSION_DATE: Date = new Date()
+  public id: string
+  constructor() {
+    this.id = Guid.create().toJSON().value
+  }
+  public async SaveData(path: string): Promise<void> {
+    const sessionId = this.id
+    new LivestockController().Save(sessionId, path)
+    new PawnsController().Save(sessionId, path)
+  }
 
-  // public static setSessionId() {}
+  public LoadData(sessionId: string, path: string): void {
+    new LivestockController().Load(sessionId, path)
+    new PawnsController().Load(sessionId, path)
+  }
 }
 
-export default Session
+export namespace Session {
+  export interface ISession {
+    id: string
+    SaveData(path: string): void
+    LoadData(sessionId: string, path: string): void
+  }
+
+  export const Schema: Realm.ObjectSchema = {
+    name: 'Session',
+    properties: {
+      name: 'string',
+      session_id: 'string',
+      date: 'date',
+    },
+  }
+}

@@ -49,7 +49,7 @@ export class ActionsController implements ActionsController.IActionController {
 
   // private HandleConversation(type: string): void {}
 
-  public Dialogue(type: MessagesController.MessagesControllerTypes, pawn: Pawn): void {
+  public Dialogue(type: MessagesController.MessagesControllerTypes, pawn: Pawn.IPawn): void {
     switch (type) {
       case 'start_conversation':
         const isActiveConversation = this.actions.find(action => action._type === 'conversation')
@@ -76,7 +76,7 @@ export class ActionsController implements ActionsController.IActionController {
     this.actions = this.actions.filter(action => action._type !== type)
   }
 
-  private EndDialogue(pawn: Pawn) {
+  private EndDialogue(pawn: Pawn.IPawn) {
     this.FilterByType('conversation')
     this.messagesController.CreateMessage('end_conversation', pawn)
     this.SetActive(true)

@@ -5,7 +5,7 @@ import { ActionsController } from '@Controllers/ActionsController'
 import UI from '@UI/index'
 
 interface IProps {
-  pawns: Pawn[]
+  pawns: Pawn.IPawn[]
   actionController: ActionsController
   playerInAction?: boolean
 }

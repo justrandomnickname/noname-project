@@ -43,7 +43,7 @@ export class ActionFactory implements ActionFactory.IActionFactory {
     return actions
   }
 
-  public StartDialogue(pawn: Pawn, endDialogue: () => void): Action.IAction[] {
+  public StartDialogue(pawn: Pawn.IPawn, endDialogue: () => void): Action.IAction[] {
     const actions: Action.IAction[] = []
     actions.push(
       new Action({
