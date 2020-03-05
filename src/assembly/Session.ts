@@ -19,8 +19,8 @@ export class Session implements Session.ISession {
   }
 
   public LoadData(sessionId: string, path: string): void {
-    new PawnsController().Load(sessionId, path)
     new LivestockController().Load(sessionId, path)
+    new PawnsController().Load(sessionId, path)
   }
 }
 
@@ -35,7 +35,8 @@ export namespace Session {
     name: 'Session',
     properties: {
       name: 'string',
-      id: 'string',
+      session_id: 'string',
+      date: 'date',
     },
   }
 }

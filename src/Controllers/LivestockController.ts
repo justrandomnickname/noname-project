@@ -42,6 +42,7 @@ export class LivestockController implements LivestockController.ILivestockContro
     const realm = new Realm({ ...getConfiguration(), path, schema: [Livestock.Schema] })
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const livestock: any = realm.objects(Livestock.Schema.name).filtered('session_id = $0', sessionId)
+
     LivestockController._livestock = new Livestock(
       livestock[0].gold,
       livestock[0].silver,

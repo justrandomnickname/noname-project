@@ -10,57 +10,66 @@ export class SessionController implements SessionController.ISessionController {
   private _dirname: any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private remote: any
-  constructor() {
+  private static _saves: SessionController.ISaveFile[] = []
+  private static _setState: React.Dispatch<React.SetStateAction<SessionController.ISaveFile[]>> | null
+  constructor(setState?: React.Dispatch<React.SetStateAction<SessionController.ISaveFile[]>>) {
     this.remote = require('electron').remote
     this.app = this.remote.app
     this._dirname = this.app.getAppPath()
+    if (setState) {
+      SessionController._setState = setState
+    }
+  }
+
+  private async FixSaveIds() {
+    const savefiles = await this.GetSaveFiles()
+    for (let i = 0; i < savefiles.length; i++) {
+      let _flag = false
+      for (let j = 0; j < savefiles.length; j++) {
+        if (!_flag && savefiles[i] === savefiles[j]) {
+          _flag = true
+          continue
+        } else if (_flag && savefiles[i] === savefiles[j]) {
+          console.log('NON UNIQUE FOUND', savefiles[i], savefiles[j])
+        }
+      }
+    }
+  }
+
+  public async LoadSaveFolder() {
+    await this.FixSaveIds()
+    const saves = await this.GetSaveFiles()
+    SessionController._saves = saves
+    this.Mount()
   }
   public async Save(name: string): Promise<void> {
-    const path = this._dirname + `/saves/${name}/${name}`
+    const path = this._dirname + `/saves/${name}/savefile.realm`
     const session = new Session()
     await Realm.open({ ...getConfiguration(), path, schema: [Session.Schema] })
       .then(realm => {
         realm.write(() => {
-          realm.create(Session.Schema.name, { name, id: session.id })
-        })
-        return realm
-      })
-      .then(realm => realm.close())
-    await Realm.open({ ...getConfiguration(), schema: [Session.Schema] })
-      .then(realm => {
-        realm.write(() => {
-          realm.create(Session.Schema.name, { name, id: session.id })
+          realm.create(Session.Schema.name, { name, session_id: session.id, date: new Date() })
         })
         return realm
       })
       .then(realm => realm.close())
     session.SaveData(path)
+    SessionController._saves = await this.GetSaveFiles()
+    this.Mount()
   }
   public async Load(sessionId: string) {
     const session = new Session()
-    const fs = this.remote.require('fs')
     const path = this._dirname + `/saves/`
-    const filenames = []
+    const savefiles = await this.GetSaveFiles()
 
-    fs.readdirSync(path).forEach((element: string) => {
-      filenames.push(element)
-    })
-
-    await Realm.open({ ...getConfiguration(), schema: [Session.Schema] })
-      .then((realm: Realm) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const savefile: any = realm.objects(Session.Schema.name).filtered('id = $0', sessionId)
-        if (savefile.length !== 0 || savefile.length >= 2) {
-          const name = savefile[0].name
-          const pathToFile = path + name + '/' + name
-          session.LoadData(sessionId, pathToFile)
-        } else {
-          //SHOULD GET NEW ID
-          throw Error('savefile id duplicated')
-        }
-        return realm
-      })
-      .then(realm => realm.close())
+    const savefile = savefiles.find(savefile => savefile.session_id === sessionId)
+    if (savefile) {
+      const pathToFile = path + savefile.name + '/' + 'savefile.realm'
+      session.LoadData(sessionId, pathToFile)
+      this.Mount()
+    } else {
+      throw Error('Savefile corrupted')
+    }
   }
   public async GetSaveFiles(): Promise<SessionController.ISaveFile[]> {
     const saves: SessionController.ISaveFile[] = []
@@ -71,35 +80,54 @@ export class SessionController implements SessionController.ISessionController {
       filenames.push(element)
     })
     filenames.forEach(filename => {
-      const pathToFile = path + filename + '/' + filename
-      const realm = new Realm({
-        ...getConfiguration(),
-        path: pathToFile,
-        schema: [Session.Schema],
-      })
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const sessionObject: any = realm.objects(Session.Schema.name)
-      const session: SessionController.ISaveFile = {
-        name: sessionObject[0].name,
-        id: sessionObject[0].id,
+      try {
+        const pathToFile = path + filename + '/' + 'savefile.realm'
+        const realm = new Realm({
+          ...getConfiguration(),
+          path: pathToFile,
+          schema: [Session.Schema],
+        })
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const sessionObject: any = realm.objects(Session.Schema.name)
+        const session: SessionController.ISaveFile = {
+          name: sessionObject[0].name,
+          session_id: sessionObject[0].session_id,
+          date: sessionObject[0].date,
+        }
+        realm.close()
+        saves.push(session)
+      } catch (e) {
+        console.error(e)
+        require('rimraf').sync(path + '/' + filename)
       }
-      realm.close()
-      saves.push(session)
     })
-    return saves
+    return saves.sort(
+      (a: SessionController.ISaveFile, b: SessionController.ISaveFile) => b.date.getTime() - a.date.getTime(),
+    )
   }
   public async Delete(sessionId: string) {
     const path = this._dirname + `/saves/`
     const saves = await this.GetSaveFiles()
-    const save = saves.filter(file => file.id === sessionId)
-    const pathToFolder = path + save[0].name
-    require('rimraf').sync(pathToFolder)
+    const save = saves.find(save => save.session_id === sessionId)
+    if (save) {
+      try {
+        SessionController._saves = SessionController._saves.filter(save => save.session_id !== sessionId)
+        const pathToFolder = path + save.name
+        require('rimraf').sync(pathToFolder)
+        this.Mount()
+      } catch (e) {
+        console.error(e)
+      }
+    }
   }
   public Mount(): void {
-    return
+    if (SessionController._setState) SessionController._setState([...this.saves])
   }
   public Unmount(): void {
-    return
+    SessionController._setState = null
+  }
+  get saves(): SessionController.ISaveFile[] {
+    return SessionController._saves
   }
 }
 
@@ -112,6 +140,7 @@ export namespace SessionController {
   }
   export interface ISaveFile {
     name: string
-    id: string
+    session_id: string
+    date: Date
   }
 }

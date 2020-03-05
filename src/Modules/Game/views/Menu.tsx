@@ -24,9 +24,9 @@ const MenuModal = styled('div')<{ isOpen: boolean }>`
 `
 
 const MenuWrapper = styled.div`
-  width: 500px;
-  height: 700px;
-  background: ${props => props.theme.primaryColor};
+  width: 700px;
+  height: 800px;
+  background: ${props => props.theme.primarySaturatedColor};
   border: ${props => `3px solid ${props.theme.secondaryColor}`};
   border-radius: 5px;
   position: absolute;
@@ -39,43 +39,68 @@ const MenuWrapper = styled.div`
   max-height: 100%;
   color: white !important;
   padding: 1em;
+  overflow: auto;
+`
+
+const SaveFileElement = styled.div`
+  // border: ${props => `1px solid ${props.theme.secondaryColor}`};
+  padding: 1em;
+  margin: 1em auto;
+  background: ${props => props.theme.primaryColor};
 `
 
 const Menu: React.FC<{}> = () => {
   const [isOpen, setOpen] = useState<boolean>(true)
   const [inputValue, setInput] = useState<string>('')
-  const sessionController = new SessionController()
+  const [isInputFocused, setInputFocus] = useState<boolean>(false)
   const [saveFiles, setSaveFiles] = useState<SessionController.ISaveFile[]>([])
+  const sessionController = new SessionController(setSaveFiles)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const input = document.getElementById('savefile__input')
+  const saveFile = (input: string) => {
+    if (input.length !== 0) sessionController.Save(input)
+    setInput('')
+  }
   useEventListener('keydown', (event: any) => {
     if (event.key === 'Escape') setOpen(state => !state)
+    if (event.key === 'Enter' && isInputFocused) saveFile(inputValue)
   })
-  const getSaves = async () => {
-    const saveFiles = await sessionController.GetSaveFiles()
-    setSaveFiles([...saveFiles])
-  }
-  const saveFile = async (input: string) => {
-    await sessionController.Save(input)
-    getSaves()
-  }
-  // const deleteFile = async (sessionId: string) => {
-  //   await sessionController.Delete(sessionId)
-  // }
+  useEventListener(
+    'blur',
+    () => {
+      setInputFocus(false)
+    },
+    input as HTMLElement,
+  )
+  useEventListener(
+    'focus',
+    () => {
+      setInputFocus(true)
+    },
+    input as HTMLElement,
+  )
   useLayoutEffect(() => {
-    getSaves()
-    return () => {}
+    sessionController.LoadSaveFolder()
+    return () => {
+      sessionController.Unmount()
+    }
   }, [])
   return (
     <MenuModal isOpen={isOpen}>
       <MenuWrapper>
         <UI.GrandText>Save file</UI.GrandText>
-        <input type="text" value={inputValue} onChange={event => setInput(event.target.value)} />
-        <UI.Button onClick={() => saveFile(inputValue)}> Save </UI.Button>
+        <input id="savefile__input" type="text" value={inputValue} onChange={event => setInput(event.target.value)} />
+        <UI.Button onClick={() => saveFile(inputValue)}>Save</UI.Button>
         {saveFiles.map((save, index) => (
-          <div key={index}>
-            {save.name}: {save.id} <button onClick={() => sessionController.Load(save.id)}>Load</button>
-            <button onClick={() => sessionController.Delete(save.id)}>Delete</button>
-          </div>
+          <SaveFileElement key={index}>
+            <UI.GrandText>{save.name}</UI.GrandText>
+            <button onClick={() => sessionController.Load(save.session_id)}>Load</button>
+            <button onClick={() => sessionController.Delete(save.session_id)}>Delete</button>
+            <br />
+            <UI.RegularText>{save.session_id}</UI.RegularText>
+            <br />
+            <UI.RegularText>{save.date.toLocaleString()}</UI.RegularText>
+          </SaveFileElement>
         ))}
       </MenuWrapper>
     </MenuModal>
